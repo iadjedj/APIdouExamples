@@ -10,9 +10,7 @@
 #
 #
 import struct
-import os, serial
-import sys, termios, time
-import select
+import time
 from bluepy import btle
 from bluepy.btle import Scanner, DefaultDelegate
 
@@ -35,7 +33,6 @@ class DeviceDelegate(btle.DefaultDelegate):
 		self.apidou = apidouClass
 
 	def handleNotification(self, handle, data):
-		# Redirection directe de la characteristique vers le fake serial
 		if len(data) == 8:
 			self.apidou.updateData(data)
 
