@@ -1,0 +1,45 @@
+#N canvas 666 130 631 400 10;
+#X obj 293 193 netsend;
+#X obj 239 -53 netreceive 3000;
+#X obj 77 0 prepend set;
+#X msg 77 22 1\ 7676\ 10200\ 10232;
+#X floatatom 315 -22 5 0 0 0 - - -, f 5;
+#X msg 196 127 connect localhost 3001;
+#X obj 383 -11 print recv;
+#X obj 234 219 print r_netsend;
+#X msg 75 87 disconnect;
+#X obj 275 87 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 363 89 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 316 26 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 274 66 delay 1000;
+#X obj 363 66 delay 1500;
+#X obj 315 1 change;
+#X obj 243 33 ==;
+#X obj 217 61 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 378 133 send 0;
+#X msg 392 153 send 1;
+#X connect 0 0 7 0;
+#X connect 1 0 2 0;
+#X connect 1 1 4 0;
+#X connect 1 1 6 0;
+#X connect 2 0 3 0;
+#X connect 4 0 14 0;
+#X connect 4 0 15 1;
+#X connect 4 0 15 0;
+#X connect 5 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 5 0;
+#X connect 10 0 17 0;
+#X connect 11 0 12 0;
+#X connect 11 0 13 0;
+#X connect 12 0 9 0;
+#X connect 13 0 10 0;
+#X connect 14 0 11 0;
+#X connect 15 0 16 0;
+#X connect 16 0 8 0;
+#X connect 17 0 0 0;
+#X connect 18 0 0 0;
