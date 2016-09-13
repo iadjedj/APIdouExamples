@@ -40,7 +40,7 @@ def handleOutput(device, output, is_tcp):
 		# is enabled and only send these ones
 		output.send_packet(1, device.accel)
 		output.send_packet(2, device.gyro)
-		output.send_packet(3, device.touch)
+		output.send_packet(3, {device.touch})
 	else:
 		output.send_packet(device)
 
@@ -74,7 +74,7 @@ def main():
 		apidou = APIdou(args.type, args.addr)
 		apidou.connect()
 
-		# apidou.setNotifyAccel(True)
+		apidou.setNotifyAccel(True)
 		# apidou.setNotifyGyro(True)
 		apidou.setNotifyTouch(True)
 		print "Connected"

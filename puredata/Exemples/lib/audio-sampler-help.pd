@@ -1,0 +1,379 @@
+#N canvas 259 87 791 575 10;
+#X declare -path ../core;
+#X declare -path ../numbers;
+#X declare -path ../../abstractions/in -path ../../abstractions/out
+-path ../../abstractions/numbers -path ../../abstractions/video -path
+../../abstractions/audio -path ../../abstractions/core -path ../../abstractions/brutbox
+;
+#X declare -path ../../abstractions/seq;
+#X declare -path ../core;
+#X msg 473 241 speed -1;
+#X floatatom 202 477 5 0 0 3 position - -;
+#X floatatom 133 477 5 0 0 3 length(ms) - -;
+#X msg 427 69 \; pd dsp 1;
+#X text 425 47 Audio on;
+#X obj 490 301 hsl 128 10 0 1 0 0 empty empty 0-1 -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 200 231 r \$0-to-sampler;
+#X obj 432 414 s \$0-to-sampler;
+#X msg 497 342 rec;
+#X msg 464 215 reset;
+#X msg 432 136 file ../../medias/sounds/voice.wav;
+#X obj 200 322 bng 15 90 50 0 empty empty end 17 7 0 10 -262144 -1
+-1;
+#X msg 443 162 play;
+#X msg 454 189 stop;
+#X msg 483 266 start 0.1 \, end 0.5 \, speed 2 \, play;
+#X obj 199 410 out~;
+#X obj 67 322 out~;
+#X msg 487 318 stop \, pos \$1;
+#X obj 200 342 kick;
+#X text 213 289 <- update start/end;
+#X text 211 277 <- lock length;
+#X text 65 188 Sound from microphone to record;
+#X text 509 213 = beginning of the sound;
+#N canvas 112 88 920 615 _1-SOUND_FILES_ 0;
+#X obj 31 367 s \$0-to-sampler;
+#X obj 61 89 bng 15 250 50 0 empty empty Random 17 7 0 10 -262144 -1
+-1;
+#X msg 61 131 file \$1;
+#X floatatom 250 128 5 0 0 3 nb_of_sounds - -;
+#X msg 31 65 file ../../medias/sounds/violin.aiff;
+#X text 28 485 Save current sound into disk;
+#X obj 32 570 s \$0-to-sampler;
+#X msg 32 502 save ../../medias/sounds/new-file.wav;
+#X msg 43 543 resize \, save ../../medias/sounds/new-file.wav;
+#X text 270 63 any .wav or .aiff files (mono);
+#X obj 79 201 browser;
+#X msg 79 179 folder ../../medias/sounds/;
+#X msg 79 343 file \$1;
+#X text 270 107 sounds from a folder;
+#X obj 79 159 loadbang;
+#X text 292 234 sounds from a folder;
+#X text 27 453 SAVE AN AUDIO FILE \; -------------------;
+#X text 39 523 Save with resizing (the correct length of the recording)
+;
+#X floatatom 575 151 5 0 0 3 nb_of_sounds - -;
+#X obj 575 84 bng 15 250 50 0 empty empty LOAD 0 -10 0 10 -262144 -1
+-1;
+#X msg 575 103 files ../../medias/sounds/*.wav;
+#X text 28 23 LOAD AND OPEN AN AUDIO FILE \; ---------------------------
+;
+#X text 573 26 OPEN A SOUND FROM PRELOADED FILES (BANK) \; -----------------------------------------
+;
+#X msg 580 291 snd-outside 1 \, snd-bank MYSOUNDS;
+#X obj 575 127 audio-bank MYSOUNDS;
+#X text 595 313 snd-outside 1 : play sound from outside \; snd-bank
+MYSOUNDS : link to the right bank of sounds;
+#X text 641 375 select the sound with its number;
+#X text 575 206 Or you can record audio in live with :;
+#X obj 447 481 out~;
+#X floatatom 605 376 5 0 100 0 - - -;
+#X msg 605 396 snd \$1 \, play;
+#X obj 605 355 hradio 15 1 0 10 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X obj 577 232 audio-rec SND;
+#X obj 61 108 folder ../../medias/sounds/*.wav;
+#X obj 447 413 audio-sampler MYSOUNDS;
+#X connect 1 0 33 0;
+#X connect 2 0 0 0;
+#X connect 4 0 0 0;
+#X connect 7 0 6 0;
+#X connect 8 0 6 0;
+#X connect 10 0 12 0;
+#X connect 11 0 10 0;
+#X connect 12 0 0 0;
+#X connect 14 0 11 0;
+#X connect 19 0 20 0;
+#X connect 20 0 24 0;
+#X connect 23 0 34 1;
+#X connect 24 0 18 0;
+#X connect 29 0 30 0;
+#X connect 30 0 34 1;
+#X connect 31 0 29 0;
+#X connect 33 0 2 0;
+#X connect 33 1 3 0;
+#X connect 34 0 28 0;
+#X restore 432 451 pd _1-SOUND_FILES_;
+#N canvas 1 81 847 641 _2-REC_PLAY_ 0;
+#X text 112 151 =;
+#X text 112 125 =;
+#X text 112 98 =;
+#X msg 532 51 speed 0.2;
+#X msg 545 75 speed -1;
+#X msg 34 73 mode \$1;
+#X obj 34 55 hradio 15 1 0 3 empty empty empty 0 -8 0 10 -262144 -1
+-1 0;
+#X msg 61 573 phase 0.5;
+#X obj 555 125 nbx 5 14 -1e+37 1e+37 0 0 empty empty semitones 0 -8
+1 9 -262144 -1 -1 0 256;
+#X msg 555 146 pitch \$1;
+#X text 618 137 pitch acts on speed value with math;
+#X text 617 151 to get semitones values;
+#X obj 34 188 s \$0-to-sampler;
+#X obj 532 184 s \$0-to-sampler;
+#X obj 48 606 s \$0-to-sampler;
+#X msg 46 99 stop;
+#X msg 57 126 play;
+#X msg 64 154 rec;
+#X msg 140 152 mode 2;
+#X msg 140 126 mode 1;
+#X msg 140 99 mode 0;
+#X msg 48 541 phase;
+#X obj 222 139 + 1;
+#X msg 222 161 mode \$1;
+#X obj 222 62 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 222 182 s \$0-to-sampler;
+#X text 31 19 STOP/PLAY/REC \; --------------;
+#X text 528 16 SPEED \; --------------;
+#X text 612 51 play very slowly (< 1);
+#X text 612 72 play reverse (negative values);
+#X text 220 17 REC & PLAY \; --------------;
+#X obj 222 82 delay 3000;
+#X text 297 79 wait 3 seconds;
+#X text 40 472 PHASE \; --------------;
+#X text 43 507 Phase is the position in the sound (0-1);
+#X text 92 541 = phase 0 (beginning of the sound);
+#X obj 37 338 s \$0-to-sampler;
+#X text 33 233 START / END \; --------------;
+#X obj 245 308 hsl 128 10 0 1 0 0 empty empty 0-1 -2 -8 0 10 -262144
+-1 -1 0 1;
+#X msg 259 355 5;
+#X obj 224 438 s \$0-to-sampler;
+#X text 325 353 ms;
+#X msg 297 355 100;
+#X msg 224 274 stop;
+#X msg 242 325 pos \$1;
+#X msg 259 379 pos-line \$1;
+#X msg 37 273 start 0.2;
+#X msg 50 305 end 0.5;
+#X text 221 232 SCRATCH \; --------------;
+#X text 261 273 First stop playing;
+#X text 261 401 it is the time between two "pos" values;
+#X obj 556 447 s \$0-to-sampler;
+#X obj 559 410 hsl 128 10 0 1 0 0 empty empty 0-1 -23 5 0 10 -262144
+-1 -1 0 1;
+#X msg 556 424 pos \$1;
+#X obj 556 364 audio-nb;
+#X obj 556 387 ../numbers/flow;
+#X text 554 222 EXAMPLE OF SCRATCH \; ------------------;
+#X obj 557 260 synth~ 1 0.35;
+#X text 579 387 < test it;
+#X obj 562 600 s \$0-to-sampler;
+#X text 621 522 (Default);
+#X msg 562 523 fade 50;
+#X msg 578 569 fade 200;
+#X text 560 485 FADE TIME FOR SMOOTHING LOOP \; ----------------------------
+;
+#X obj 222 105 onoff 2000;
+#X connect 3 0 13 0;
+#X connect 4 0 13 0;
+#X connect 5 0 12 0;
+#X connect 6 0 5 0;
+#X connect 7 0 14 0;
+#X connect 8 0 9 0;
+#X connect 9 0 13 0;
+#X connect 15 0 12 0;
+#X connect 16 0 12 0;
+#X connect 17 0 12 0;
+#X connect 21 0 14 0;
+#X connect 22 0 23 0;
+#X connect 23 0 25 0;
+#X connect 24 0 31 0;
+#X connect 31 0 64 0;
+#X connect 38 0 44 0;
+#X connect 39 0 45 0;
+#X connect 42 0 45 0;
+#X connect 43 0 40 0;
+#X connect 44 0 40 0;
+#X connect 45 0 40 0;
+#X connect 46 0 36 0;
+#X connect 47 0 36 0;
+#X connect 52 0 53 0;
+#X connect 53 0 51 0;
+#X connect 54 0 55 0;
+#X connect 55 0 52 0;
+#X connect 57 0 54 0;
+#X connect 61 0 59 0;
+#X connect 62 0 59 0;
+#X connect 64 0 22 0;
+#X restore 432 472 pd _2-REC_PLAY_;
+#N canvas 569 77 729 439 _3-PLAY_SLICES_ 0;
+#X msg 234 333 start \$1 \, play;
+#X obj 234 268 bng 15 250 50 0 empty empty play_a_slice 17 7 0 10 -262144
+-1 -1;
+#X obj 210 381 s \$0-to-sampler;
+#X obj 234 310 / 100;
+#X msg 225 228 length-ms 250;
+#X text 15 38 PLAY SLICES OF THE SOUND \; -------------------------
+;
+#X obj 31 256 random 10;
+#X obj 31 278 / 10;
+#X obj 31 237 bng 15 250 50 0 empty empty play_a_slice 17 7 0 10 -262144
+-1 -1;
+#X obj 31 318 pack f f;
+#X obj 31 298 t f f;
+#X floatatom 101 274 5 0 0 2 length(0-1) - -;
+#X msg 31 340 end \$2 \, start \$1 \, play;
+#X obj 17 377 s \$0-to-sampler;
+#X obj 74 298 + 0.2;
+#X obj 478 370 s \$0-to-sampler;
+#X msg 478 213 slice-nb 10;
+#X msg 502 327 slice \$1;
+#X text 562 326 Play slices;
+#X obj 502 306 hradio 15 1 0 10 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X obj 17 100 s \$0-to-sampler;
+#X text 205 79 General setup;
+#X text 13 152 CLASSIC WAY \; -----------;
+#X text 206 157 AUTO-LENGTH \; -----------;
+#X obj 234 287 random 85;
+#X msg 17 192 auto-length 0;
+#X msg 17 73 stop \, loop 0 \, auto-update 0;
+#X msg 210 200 length 0.15;
+#X text 300 203 length of the slice (0-1);
+#X text 322 228 or in ms;
+#X text 475 166 AUTOMATIC WAY \; -------------;
+#X text 563 212 Set number of slices;
+#X obj 502 262 bng 15 250 50 0 empty empty play_a_slice 17 7 0 10 -262144
+-1 -1;
+#X obj 502 281 random 10;
+#X obj 509 237 metro 100;
+#X obj 488 237 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X connect 0 0 2 0;
+#X connect 1 0 24 0;
+#X connect 3 0 0 0;
+#X connect 4 0 2 0;
+#X connect 6 0 7 0;
+#X connect 7 0 10 0;
+#X connect 8 0 6 0;
+#X connect 9 0 12 0;
+#X connect 10 0 9 0;
+#X connect 10 1 14 0;
+#X connect 11 0 14 1;
+#X connect 12 0 13 0;
+#X connect 14 0 9 1;
+#X connect 16 0 15 0;
+#X connect 17 0 15 0;
+#X connect 19 0 17 0;
+#X connect 24 0 3 0;
+#X connect 25 0 13 0;
+#X connect 26 0 20 0;
+#X connect 27 0 2 0;
+#X connect 32 0 33 0;
+#X connect 33 0 19 0;
+#X connect 34 0 32 0;
+#X connect 35 0 34 0;
+#X restore 432 493 pd _3-PLAY_SLICES_;
+#X text 651 135 Open an audio file;
+#N canvas 337 79 922 566 _4-GENERAL_AUTO_SIZES 0;
+#X obj 98 123 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 98 141 loop \$1;
+#X floatatom 73 385 8 0 0 1 ms - -;
+#X msg 106 215 on \$1;
+#X obj 106 198 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 84 98 init;
+#X text 128 96 start 0 \, end 1 \, speed 1;
+#X obj 68 242 s \$0-to-sampler;
+#X obj 422 278 s \$0-to-sampler;
+#X msg 422 87 auto-pause \$1;
+#X obj 422 67 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 434 117 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 434 135 auto-play \$1;
+#X msg 73 407 rec-time \$1;
+#X obj 444 172 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 457 221 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 444 191 auto-length \$1;
+#X msg 457 240 auto-update \$1;
+#X msg 68 69 reset;
+#X text 113 67 = beginning of the sound (phase 0);
+#X text 155 139 loop or oneshot;
+#X obj 105 169 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 73 520 s \$0-to-sampler;
+#X text 418 22 AUTOMATIC BEHAVIORS \; -----------------;
+#X text 526 89 If 1 : Add a feature play/pause on the play button \;
+Default : 0 \;;
+#X text 528 133 If 1 : rec during rec-time and playback after \; Default
+: 0 \;;
+#X text 544 189 If 1 : start position controls the end position \;
+Default : 0 \;;
+#X text 125 166 oneshot : play once;
+#X text 557 240 If 1 : any changes with start/end is updated \; If
+0 : you have to add a message to trigger values (play for instance)
+\; Default : 1 \;;
+#X text 63 26 GENERAL \; -----------------;
+#X msg 111 442 resize;
+#X text 70 336 SIZE OF THE SOUND \; -----------------;
+#X text 152 385 set recording time (default 20000 ms = 20 seconds)
+;
+#X text 166 440 resize the sound with the current size;
+#X text 279 468 set size in samples;
+#X text 271 493 set size in ms;
+#X msg 137 471 size-smp 44100 \, resize;
+#X msg 137 494 size 500 \, resize;
+#X connect 0 0 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 13 0;
+#X connect 3 0 7 0;
+#X connect 4 0 3 0;
+#X connect 5 0 7 0;
+#X connect 9 0 8 0;
+#X connect 10 0 9 0;
+#X connect 11 0 12 0;
+#X connect 12 0 8 0;
+#X connect 13 0 22 0;
+#X connect 14 0 16 0;
+#X connect 15 0 17 0;
+#X connect 16 0 8 0;
+#X connect 17 0 8 0;
+#X connect 18 0 7 0;
+#X connect 21 0 7 0;
+#X connect 30 0 22 0;
+#X connect 36 0 22 0;
+#X connect 37 0 22 0;
+#X restore 432 514 pd _4-GENERAL_AUTO_SIZES;
+#X obj 133 454 route length pos freq;
+#X floatatom 258 476 5 0 0 3 frequence_(hz) - -;
+#X obj 495 370 bng 15 250 50 0 empty empty oneshot 17 7 0 10 -262144
+-1 -1;
+#X floatatom 495 393 5 0 0 1 speed - -;
+#X text 69 29 audio-sampler \; ------------- \; Play and record sounds
+(mono) \; Argument \; \$1 : bank;
+#X obj 67 213 audio-in;
+#X obj 427 28 ../include;
+#X obj 67 253 audio-sampler;
+#X msg 320 236 pitch \$1;
+#X msg 320 212 -12;
+#X text 318 194 octave;
+#X connect 0 0 7 0;
+#X connect 5 0 17 0;
+#X connect 6 0 35 1;
+#X connect 8 0 7 0;
+#X connect 9 0 7 0;
+#X connect 10 0 7 0;
+#X connect 11 0 18 0;
+#X connect 12 0 7 0;
+#X connect 13 0 7 0;
+#X connect 14 0 7 0;
+#X connect 17 0 7 0;
+#X connect 18 0 15 0;
+#X connect 28 0 2 0;
+#X connect 28 1 1 0;
+#X connect 28 2 29 0;
+#X connect 30 0 7 0;
+#X connect 31 0 7 0;
+#X connect 33 0 35 0;
+#X connect 35 0 16 0;
+#X connect 35 1 28 0;
+#X connect 35 2 11 0;
+#X connect 36 0 35 1;
+#X connect 37 0 36 0;

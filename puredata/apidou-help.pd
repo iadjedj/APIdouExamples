@@ -1,0 +1,70 @@
+#N canvas 0 0 944 982 10;
+#X msg 287 42 graph;
+#X obj 287 242 unpack 0 0 0;
+#X floatatom 356 314 5 0 0 0 z - -;
+#X floatatom 287 268 5 0 0 0 x - -;
+#X floatatom 321 290 5 0 0 0 y - -;
+#X obj 287 93 apidou;
+#X obj 527 500 tgl 15 0 empty empty Pied_G -40 7 0 10 -262144 -1 -1
+0 1;
+#X obj 546 524 tgl 15 0 empty empty Pied_D -40 7 0 10 -262144 -1 -1
+0 2;
+#X obj 566 546 tgl 15 0 empty empty Papillon_G -65 7 0 10 -262144 -1
+-1 0 4;
+#X obj 585 567 tgl 15 0 empty empty Papillon_D -65 7 0 10 -262144 -1
+-1 0 8;
+#X obj 605 590 tgl 15 0 empty empty Oreille_G -60 7 0 10 -262144 -1
+-1 0 16;
+#X obj 624 613 tgl 15 0 empty empty Oreille_D -60 7 0 10 -262144 -1
+-1 0 32;
+#X obj 644 636 tgl 15 0 empty empty pompom -40 7 0 10 -262144 -1 -1
+0 64;
+#X obj 400 342 unpack 0 0 0;
+#X floatatom 470 423 5 0 0 1 z - -;
+#X floatatom 400 371 5 0 0 1 x - -;
+#X floatatom 434 402 5 0 0 1 y - -;
+#X obj 400 446 knob 32 32 -500 500 0 0 empty empty empty 0 -8 0 8 -262144
+-1 -1 1545 1;
+#X obj 434 446 knob 32 32 -500 500 0 0 empty empty empty 0 -8 0 8 -262144
+-1 -1 1546 1;
+#X obj 470 446 knob 32 32 -500 500 0 0 empty empty empty 0 -8 0 8 -262144
+-1 -1 1550 1;
+#X obj 480 222 tgl 15 0 empty empty Connecté 17 7 0 10 -262144 -1
+-1 1 1;
+#X text -90 258 Acceleration en G;
+#X text -95 357 gyroscope en degré par secondes;
+#X text -90 275 Maximum = 2g;
+#X text -95 380 Maximum = 500 degrés par secondes;
+#X text -93 504 Toucher de l'Apidou;
+#X text -89 93 Objet pure data pour receptionner les donnés d'Apidou
+le doudou connecté.;
+#X text -88 118 Plus d'info sur http://www.apidou.fr/;
+#X text -88 141 L'objectif de cet objet Puredata est de créer une
+interface aisée d'intégration aux processus temps réels;
+#X obj 527 477 unpack 0 0 0 0 0 0 0;
+#X text -91 200 Démarrer le patch Puredata Apidou avant de lançer
+le script python;
+#X text -89 169 Cet objet est en lien avec un script python qui envoi
+en protocole tcp standart;
+#X text -108 561 cette version est compatible extended 0.43.4;
+#X connect 0 0 5 0;
+#X connect 1 0 3 0;
+#X connect 1 1 4 0;
+#X connect 1 2 2 0;
+#X connect 5 0 1 0;
+#X connect 5 1 13 0;
+#X connect 5 2 29 0;
+#X connect 5 3 20 0;
+#X connect 13 0 15 0;
+#X connect 13 1 16 0;
+#X connect 13 2 14 0;
+#X connect 14 0 19 0;
+#X connect 15 0 17 0;
+#X connect 16 0 18 0;
+#X connect 29 0 6 0;
+#X connect 29 1 7 0;
+#X connect 29 2 8 0;
+#X connect 29 3 9 0;
+#X connect 29 4 10 0;
+#X connect 29 5 11 0;
+#X connect 29 6 12 0;

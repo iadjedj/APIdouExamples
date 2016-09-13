@@ -1,0 +1,23 @@
+#N canvas 331 259 362 331 10;
+#X obj 40 290 dac~;
+#X msg 237 122 \; pd dsp 1;
+#X obj 41 266 *~ 0.3;
+#X floatatom 41 206 5 0 127 1 pitch_(0-127) - -;
+#X obj 41 161 random 20;
+#X obj 41 181 + 60;
+#X obj 41 137 metro 500;
+#X obj 41 116 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 41 94 loadbang;
+#X obj 41 237 synth-xylo;
+#X text 46 32 synth-xylo \; --------------- \; Xylophone synthesis.
+;
+#X connect 2 0 0 0;
+#X connect 2 0 0 1;
+#X connect 3 0 9 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 6 0 4 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 0;
+#X connect 9 0 2 0;
