@@ -43,6 +43,7 @@ class COMSend():
 		# make the sure the port is readable (if the script is launched as root)
 		os.chmod(s_name, 0664)
 		self.master = master
+		self.slave = slave
 		self.thread = ComThread(master)
 		self.thread.daemon = True
 		self.thread.start()
@@ -62,8 +63,8 @@ class COMSend():
 			Sending everytime all the data is not pretty
 			but makes coding on the other side easier
 		"""
-		packet = struct.pack("Bhhhhhhh", 42, apidou.touch, apidou.accel[0],apidou.accel[1],apidou.accel[2],\
-											 apidou.gyro[0],apidou.gyro[1],apidou.gyro[2])
+		packet = struct.pack("hhhhhhhB", apidou.touch, apidou.accel[0],apidou.accel[1],apidou.accel[2],\
+											 apidou.gyro[0],apidou.gyro[1],apidou.gyro[2], 42)
 		self.send(packet)
 
 	def get_message(self):
@@ -76,6 +77,6 @@ class COMSend():
 	def close(self):
 		""" close the serial connection """
 		global kill_thread
-		os.close(master)
-		os.close(slave)
+		os.close(self.master)
+		os.close(self.slave)
 		kill_thread = True
