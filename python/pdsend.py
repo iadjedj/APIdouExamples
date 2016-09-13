@@ -55,7 +55,7 @@ class PdSend():
 	def send(self, msg):
 		""" send a list of message strings to pd """
 		try:
-			self.pd.send(str(msg) + ';')
+			self.pd.send(str(msg) + ";\n")
 		except:
 			print 'Could not send. Did you open a connection?'
 			pass
