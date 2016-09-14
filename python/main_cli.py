@@ -4,7 +4,8 @@ import time
 import argparse
 from apidou import *
 from pdsend import *
-from comsend import *
+if sys.platform.startswith('linux'):
+	from comsend import *
 import pygatt.backends
 
 compt = 0
@@ -68,7 +69,11 @@ def main():
 	if args.tcp:
 		output = PdSend()
 	elif args.com:
-		output = COMSend()
+		if sys.platform.startswith('linux'):
+			output = COMSend()
+		else:
+			print "Serial redirection only works on Linux"
+			return
 
 	try:
 		apidou = APIdou(args.type, args.addr)
