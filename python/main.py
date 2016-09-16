@@ -17,16 +17,16 @@ def main():
 		# Connect to this APIdou
 		apidou.connect()
 
+		# Make the APIdou vibrate for 100ms to check if connection is ok
+		apidou.setVibration(True)
+		time.sleep(0.1)
+		apidou.setVibration(False)
+
 		# Start the accelerometer and the touch sensor.
 		# Warning : Without this, you will receive no data from APIdou
 		apidou.setNotifyAccel(True)
 		apidou.setNotifyTouch(True)
 
-		# Make the APIdou vibrate for 100ms to check if connection is ok
-		apidou.setVibration(True)
-		time.sleep(0.1)
-		apidou.setVibration(False)
-		
 		print "Connected"
 		while True:
 			if apidou.isTouched(APIdou.ANTENNA):
