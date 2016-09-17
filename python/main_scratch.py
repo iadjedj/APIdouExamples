@@ -65,7 +65,7 @@ def main():
 				sendScratchCommand("pied_droit")
 			if apidou.isTouched(APIdou.ANTENNA):
 				sendScratchCommand("antenne")
-			time.sleep(0.01)
+			time.sleep(0.1)
 
 	except pygatt.exceptions.NotConnectedError:
 		print "Could not connect. Check if device is on (program will exit)"
