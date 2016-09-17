@@ -60,9 +60,9 @@ def main():
 			if apidou.isTouched(APIdou.RIGHT_HAND):
 				sendScratchCommand("main_droite")
 			if apidou.isTouched(APIdou.LEFT_EAR):
-				sendScratchCommand("pied_gauche")
+				sendScratchCommand("oreille_gauche")
 			if apidou.isTouched(APIdou.RIGHT_EAR):
-				sendScratchCommand("pied_droit")
+				sendScratchCommand("oreille_droite")
 			if apidou.isTouched(APIdou.ANTENNA):
 				sendScratchCommand("antenne")
 			time.sleep(0.1)
