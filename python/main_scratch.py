@@ -31,7 +31,7 @@ def main():
 	try:
 		# Create an APIdou object using a BlueGiga adapter
 		# and a given MAC address
-		apidou = APIdou("bled112", "EC:12:AF:B3:20:F9")
+		apidou = APIdou("bled112", "CB:99:E8:46:1F:46")
 		# Connect to this APIdou
 		apidou.connect()
 
@@ -43,14 +43,16 @@ def main():
 		# Start the accelerometer and the touch sensor.
 		# Warning : Without this, you will receive no data from APIdou
 		apidou.setNotifyTouch(True)
+		# apidou.setNotifyAccel(True)
 
-		print("Connecting...")
+		print("Connecting to Scratch...")
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.connect(("127.0.0.1", 42001))
+		sock.settimeout(0.1)
+
 		print("Connected!")
 
 		while True:
-			print apidou.touch
 			if apidou.isTouched(APIdou.LEFT_FOOT):
 				sendScratchCommand("pied_gauche")
 			if apidou.isTouched(APIdou.RIGHT_FOOT):
@@ -65,6 +67,23 @@ def main():
 				sendScratchCommand("oreille_droite")
 			if apidou.isTouched(APIdou.ANTENNA):
 				sendScratchCommand("antenne")
+			try:
+				data = sock.recv(100)
+				if not data:
+					pass
+				else:
+					msg = data.split('"')[1::2][0]
+					print msg
+					if msg == "vibre":
+						apidou.setVibration(True)
+					elif msg == "ne_vibre_plus":
+						apidou.setVibration(False)
+					else:
+						print "Unknown message received"
+			except socket.timeout:
+				pass
+			except Exception, e:
+				raise e
 			time.sleep(0.1)
 
 	except pygatt.exceptions.NotConnectedError:
