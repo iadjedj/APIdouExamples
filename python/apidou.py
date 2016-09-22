@@ -1,5 +1,6 @@
 import pygatt.backends
 import struct
+import math
 
 class APIdou():
 	"""
@@ -19,7 +20,7 @@ class APIdou():
 	RIGHT_EAR	= 2**5
 	ANTENNA		= 2**6
 
-	def __init__(self, backend, mac, hci_device='hci0'):
+	def __init__(self, backend, mac, hci_device='hci1'):
 		""" Default constructor
 				Arguments :
 					backend : Can be "bled112" or "gatttool"
@@ -185,6 +186,16 @@ class APIdou():
 
 		"""
 		if (self.touch & zones) != 0:
+			return True
+		else:
+			return False
+
+	def isShaken(self):
+		"""
+		Returns true if APIdou is currently shaken.
+		The accelerometer needs to be on with the default callback
+		"""
+		if math.sqrt(self.accel[0] ** 2 + self.accel[1] ** 2 + self.accel[2] ** 2) > 27000:
 			return True
 		else:
 			return False

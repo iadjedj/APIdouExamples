@@ -1,0 +1,13 @@
+{
+	"extensionName": "APIdou",
+	"extensionPort": 1337,
+	"menus": {
+		"TouchZones": ["oreille_droite", "oreille_gauche", "main_gauche", "main_droite", "pied_gauche", "pied_droit", "antenne"]
+	},
+	"blockSpecs":[
+		["b", "APIdou est touché sur %m.TouchZones", "touch", "antenne"],
+		["b", "APIdou fait un calin", "calin"],
+		["b", "APIdou est secoué", "shake"],
+		[" ", "Faire vibrer APIdou pendant %n ms", "vibrate", 100]
+	]
+}
