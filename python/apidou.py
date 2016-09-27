@@ -1,6 +1,19 @@
 import pygatt.backends
 import struct
-import math
+import math, numpy
+from enum import Enum, unique
+
+@unique
+class APIdouPositions(Enum):
+	ON_THE_BACK = 0
+	FACING_DOWN = 1
+	STANDING = 2
+	UPSIDE_DOWN = 3
+	ON_THE_LEFT = 4
+	ON_THE_RIGHT = 5
+	MOVING = 6
+	FALLING = 7
+	UNKNOW = 8
 
 class APIdou():
 	"""
@@ -37,6 +50,7 @@ class APIdou():
 		self.accel = 3 * [0]
 		self.gyro = 3 * [0]
 		self.touch = 0
+		self.mag = 0
 		self.hci = hci_device
 
 	@staticmethod
@@ -92,9 +106,16 @@ class APIdou():
 		self.adapter.stop()
 
 	def accelNotificationCallback(self, handle, value):
-		"""Default callback for the accelerometer """
+		""" Default callback for the accelerometer
+			Calculates magnitude of the acceleration vector and
+			applies a basic lowpass filter
+		"""
 		if len(value) == 6:
-			self.accel = struct.unpack("hhh", value)
+			new_data = struct.unpack("hhh", value)
+			self.accel[0] = new_data[0] * 0.3 + self.accel[0] * 0.7
+			self.accel[1] = new_data[1] * 0.3 + self.accel[1] * 0.7
+			self.accel[2] = new_data[2] * 0.3 + self.accel[2] * 0.7
+			self.mag = math.sqrt(self.accel[0] ** 2 + self.accel[1] ** 2 + self.accel[2] ** 2)
 
 	def gyroNotificationCallback(self, handle, value):
 		"""Default callback for the gyroscope """
@@ -127,7 +148,6 @@ class APIdou():
 				self.__subscribe(self.accel_uuid, self.accelNotificationCallback)
 			else:
 				self.__subscribe(self.accel_uuid, callback)
-
 		else:
 			self.device.unsubscribe(self.accel_uuid)
 
@@ -142,7 +162,6 @@ class APIdou():
 				self.__subscribe(self.gyro_uuid, self.gyroNotificationCallback)
 			else:
 				self.__subscribe(self.gyro_uuid, callback)
-
 		else:
 			self.device.unsubscribe(self.gyro_uuid)
 
@@ -192,10 +211,37 @@ class APIdou():
 
 	def isShaken(self):
 		"""
-		Returns true if APIdou is currently shaken.
+		Returns true if APIdou is currently in a rapid movement ~1.6g
 		The accelerometer needs to be on with the default callback
 		"""
-		if math.sqrt(self.accel[0] ** 2 + self.accel[1] ** 2 + self.accel[2] ** 2) > 27000:
+		if self.mag > 27000:
 			return True
 		else:
 			return False
+
+	def getPosition(self):
+		""" Performs a basic position detection with the accelerometer
+			The accelerometer needs to be on with the default callback
+		"""
+		if self.mag > 22000:
+			return APIdouPositions.MOVING
+		elif self.mag < 5000:
+			return APIdouPositions.FALLING
+
+		pitch = (numpy.arctan2(self.accel[1], self.accel[2]) * (180 / math.pi)) % 360 
+		roll = (numpy.arctan2(self.accel[0], self.accel[2]) * (180 / math.pi)) % 360
+
+		if (pitch < 20 or pitch > 340) and (roll < 20 or roll > 340):
+			return APIdouPositions.ON_THE_BACK
+		elif 150 < pitch < 210 and 150 < roll < 210:
+			return APIdouPositions.FACING_DOWN
+		elif 45 < pitch < 135:
+			return APIdouPositions.STANDING
+		elif 225 < pitch < 315:
+			return APIdouPositions.UPSIDE_DOWN
+		elif 45 < roll < 135:
+			return APIdouPositions.ON_THE_LEFT
+		elif 225 < roll < 315:
+			return APIdouPositions.ON_THE_RIGHT
+		else:
+			return APIdouPositions.UNKNOW
