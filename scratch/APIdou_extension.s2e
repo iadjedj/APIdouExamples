@@ -2,10 +2,12 @@
 	"extensionName": "APIdou",
 	"extensionPort": 1337,
 	"menus": {
-		"TouchZones": ["oreille_droite", "oreille_gauche", "main_gauche", "main_droite", "pied_gauche", "pied_droit", "antenne"]
+		"TouchZones": ["oreille_droite", "oreille_gauche", "main_gauche", "main_droite", "pied_gauche", "pied_droit", "antenne"],
+		"Positions": ["sur_le_dos", "sur_le_ventre", "sur_la_gauche", "sur_la_droite", "debout", "la_tete_en_bas"]
 	},
 	"blockSpecs":[
 		["b", "APIdou est touché sur %m.TouchZones", "touch", "antenne"],
+		["b", "APIdou est %m.Positions", "position", "debout"],
 		["b", "APIdou fait un calin", "calin"],
 		["b", "APIdou est secoué", "shake"],
 		[" ", "Faire vibrer APIdou pendant %n ms", "vibrate", 100]

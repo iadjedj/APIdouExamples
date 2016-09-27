@@ -37,6 +37,27 @@ def poll():
 
 	msg += "\ntouch/antenne "
 	msg += "true" if apidou.isTouched(APIdou.ANTENNA) else "false"
+
+	pos = apidou.getPosition()
+
+	msg += "\nposition/sur_le_dos "
+	msg += "true" if pos == APIdouPositions.ON_THE_BACK else "false"
+
+	msg += "\nposition/sur_le_ventre "
+	msg += "true" if pos == APIdouPositions.FACING_DOWN else "false"
+
+	msg += "\nposition/debout "
+	msg += "true" if pos == APIdouPositions.STANDING else "false"
+
+	msg += "\nposition/la_tete_en_bas "
+	msg += "true" if pos == APIdouPositions.UPSIDE_DOWN else "false"
+
+	msg += "\nposition/sur_la_gauche "
+	msg += "true" if pos == APIdouPositions.ON_THE_LEFT else "false"
+
+	msg += "\nposition/sur_la_droite "
+	msg += "true" if pos == APIdouPositions.ON_THE_RIGHT else "false"
+
 	msg += "\n"
 
 	if apidou.touch == 127:
