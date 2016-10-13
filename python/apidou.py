@@ -89,7 +89,7 @@ class APIdou():
 		because in pygatt, each read/write calls get_handle.
 		Doing these operations by handles is a lot cleaner.
 		You can also use these handles if you write your own notification
-		callbacks to known wich characteristic has been notified.
+		callbacks to known which characteristic has been notified.
 		"""
 		self.accel_handle	= self.device.get_handle(self.accel_uuid)
 		self.gyro_handle	= self.device.get_handle(self.gyro_uuid)
