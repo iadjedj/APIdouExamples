@@ -1,8 +1,9 @@
 import logging
 import sys
 import time
-from apidou import *
+from apidou import APIdou
 
+MY_APIDOU = "E6:A4:7B:AB:A9:2D"
 
 def main():
 	"""
@@ -13,7 +14,7 @@ def main():
 	try:
 		# Create an APIdou object using a BlueGiga adapter
 		# and a given MAC address
-		apidou = APIdou("bled112", "E6:A4:7B:AB:A9:2D")
+		apidou = APIdou("bled112", MY_APIDOU)
 		# Connect to this APIdou
 		apidou.connect()
 
@@ -31,7 +32,11 @@ def main():
 		while True:
 			if apidou.isTouched(APIdou.ANTENNA):
 				print "The antenna is touched"
-			print "Accel: ", apidou.accel
+
+			if apidou.getPosition() == APIdouPositions.UPSIDE_DOWN:
+				apidou.setVibration(True)
+			else:
+				apidou.setVibration(False)
 			time.sleep(0.01)
 
 	except pygatt.exceptions.NotConnectedError:

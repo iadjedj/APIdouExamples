@@ -2,7 +2,7 @@ import logging
 import sys
 import time
 import argparse
-from apidou import *
+from apidou import APIdou
 from pdsend import *
 if sys.platform.startswith('linux'):
 	from comsend import *

@@ -1,12 +1,16 @@
 import logging
 import sys
 import time
-from apidou import *
+from apidou import APIdou
 
 def main():
-	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
 
-	adapter = raw_input("Quel type de peripherique BLE ? (entrez bled112 ou linux)\n")
+	adapter = raw_input("Which BLE device are you using ? (entrez bled112 ou linux)\n")
+
+	if adapter not in {"bled112", "linux"}:
+		print "Not a valid choice"
+		return
 
 	scan_result = APIdou.scan(adapter, timeout=5)
 	for i in range(0, len(scan_result)):
@@ -14,23 +18,25 @@ def main():
 		i += 1
 
 	nb = raw_input("A quel periph se connecter ? ")
-	if int(nb) not in range(0, len(scan_result)):
-		print "Not a valid choice"
-		sys.exit(0)
 	try:
-		apidou = APIdou(adapter, scan_result[int(nb)]['address'])
+		choice = int(nb)
+	except ValueError:
+		print "Please enter a number"
+		return
+	if choice not in range(0, len(scan_result)):
+		print "Not a valid choice"
+		return
+
+	try:
+		apidou = APIdou(adapter, scan_result[choice]['address'])
 		apidou.connect()
 	except pygatt.exceptions.NotConnectedError:
 		print "Could not connect. Check if device is on (program will exit)"
-		sys.exit(0)
+		return
 
 	apidou.setVibration(True)
 	time.sleep(0.1)
 	apidou.setVibration(False)
-
-	# apidou.setNotifyAccel(True)
-	# while True:
-	# 	print "Accel: ", apidou.accel
 
 	apidou.disconnect()
 
