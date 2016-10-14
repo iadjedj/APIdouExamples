@@ -1,6 +1,6 @@
 import pygatt.backends
 import struct
-import math, numpy
+import math
 from enum import Enum, unique
 
 @unique
@@ -228,8 +228,8 @@ class APIdou():
 		elif self.mag < 5000:
 			return APIdouPositions.FALLING
 
-		pitch = (numpy.arctan2(self.accel[1], self.accel[2]) * (180 / math.pi)) % 360 
-		roll = (numpy.arctan2(self.accel[0], self.accel[2]) * (180 / math.pi)) % 360
+		pitch = (math.atan2(self.accel[1], self.accel[2]) * (180 / math.pi)) % 360 
+		roll = (math.atan2(self.accel[0], self.accel[2]) * (180 / math.pi)) % 360
 
 		if (pitch < 20 or pitch > 340) and (roll < 20 or roll > 340):
 			return APIdouPositions.ON_THE_BACK
