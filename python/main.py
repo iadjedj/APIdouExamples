@@ -12,7 +12,7 @@ def main():
 
 	try:
 		# Create an APIdou object using a BlueGiga adapter
-		# and a given MAC address
+		# and a given MAC address
 		apidou = APIdou("bled112", "E6:A4:7B:AB:A9:2D")
 		# Connect to this APIdou
 		apidou.connect()
