@@ -1,101 +1,114 @@
-#N canvas 268 53 944 693 10;
-#X msg 349 264 graph;
-#X obj 156 413 unpack 0 0 0;
-#X floatatom 225 485 5 0 0 0 z - -, f 5;
-#X floatatom 156 439 5 0 0 0 x - -, f 5;
-#X floatatom 190 461 5 0 0 0 y - -, f 5;
-#X obj 156 289 apidou;
-#X obj 402 490 tgl 15 0 empty empty Pied_G -40 7 0 10 -262144 -1 -1
+#N canvas 57 14 812 695 10;
+#X msg 220 264 graph;
+#X obj 27 413 unpack 0 0 0;
+#X floatatom 96 485 5 0 0 0 z - -, f 5;
+#X floatatom 27 439 5 0 0 0 x - -, f 5;
+#X floatatom 61 461 5 0 0 0 y - -, f 5;
+#X obj 27 289 apidou;
+#X obj 273 490 tgl 15 0 empty empty Pied_G -40 7 0 10 -262144 -1 -1
 0 1;
-#X obj 421 514 tgl 15 0 empty empty Pied_D -40 7 0 10 -262144 -1 -1
-0 2;
-#X obj 441 536 tgl 15 0 empty empty Papillon_G -65 7 0 10 -262144 -1
--1 0 4;
-#X obj 460 557 tgl 15 0 empty empty Papillon_D -65 7 0 10 -262144 -1
--1 0 8;
-#X obj 480 580 tgl 15 0 empty empty Oreille_G -60 7 0 10 -262144 -1
--1 0 16;
-#X obj 499 603 tgl 15 0 empty empty Oreille_D -60 7 0 10 -262144 -1
--1 0 32;
-#X obj 519 626 tgl 15 0 empty empty pompom -40 7 0 10 -262144 -1 -1
-0 64;
-#X obj 262 456 unpack 0 0 0;
-#X floatatom 332 537 5 0 0 1 z - -, f 5;
-#X floatatom 262 485 5 0 0 1 x - -, f 5;
-#X floatatom 296 516 5 0 0 1 y - -, f 5;
-#X obj 349 393 tgl 15 0 empty empty Connecté 17 7 0 10 -262144 -1
+#X obj 292 514 tgl 15 0 empty empty Pied_D -40 7 0 10 -262144 -1 -1
+0 1;
+#X obj 312 536 tgl 15 0 empty empty Papillon_G -65 7 0 10 -262144 -1
 -1 0 1;
-#X text 559 447 Acceleration en G;
-#X text 559 508 gyroscope en degré par secondes;
-#X text 559 464 Maximum = 2g;
-#X text 558 532 Maximum = 500 degrés par secondes;
-#X text 560 575 Toucher de l'Apidou;
-#X text 165 49 Objet pure data pour receptionner les donnés d'Apidou
-le doudou connecté.;
-#X text 165 82 Plus d'info sur http://www.apidou.fr/;
-#X text 165 101 L'objectif de cet objet Puredata est de créer une
-interface aisée d'intégration aux processus temps réels;
-#X obj 402 467 unpack 0 0 0 0 0 0 0;
-#X text 522 50 Démarrer le patch Puredata Apidou avant de lançer
-le script python;
-#X text 165 136 Cet objet est en lien avec un script python qui envoi
-en protocole tcp standart;
-#X obj 158 198 bng 15 250 50 0 empty empty impulsion 17 7 0 10 -262144
--1 -1;
-#X obj 152 171 tgl 15 0 empty empty active\ vibreur 17 7 0 10 -262144
--1 -1 0 1;
-#X msg 181 264 time 500 500;
-#X msg 165 241 loop \$1;
-#X obj 165 218 tgl 15 0 empty empty boucle 17 7 0 10 -262144 -1 -1
+#X obj 331 557 tgl 15 0 empty empty Papillon_D -65 7 0 10 -262144 -1
+-1 0 1;
+#X obj 351 580 tgl 15 0 empty empty Oreille_G -60 7 0 10 -262144 -1
+-1 0 1;
+#X obj 370 603 tgl 15 0 empty empty Oreille_D -60 7 0 10 -262144 -1
+-1 0 1;
+#X obj 390 626 tgl 15 0 empty empty pompom -40 7 0 10 -262144 -1 -1
 0 1;
-#X obj 163 12 cnv 15 130 30 empty empty APIdou 20 12 0 25 -260097 -1
-0;
-#X obj 552 172 cnv 15 150 15 empty empty entree 20 12 0 14 -233017
--66577 0;
-#X obj 556 401 cnv 15 150 15 empty empty sorties 20 12 0 14 -233017
--66577 0;
-#X text 522 82 cette version est compatible extended 0.43.4 et pd-l2ork
-;
-#X text 553 338 DROITE;
-#X msg 554 364 graph;
-#X text 599 363 Affiche les graphiques des mouvements;
-#X text 553 197 GAUCHE;
-#X text 554 215 Vibreur;
-#X obj 554 237 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X text 578 238 active le vibreur en continue;
-#X obj 555 259 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 133 456 unpack 0 0 0;
+#X floatatom 203 537 5 0 0 1 z - -, f 5;
+#X floatatom 133 485 5 0 0 1 x - -, f 5;
+#X floatatom 167 516 5 0 0 1 y - -, f 5;
+#X obj 220 393 tgl 15 0 empty empty Connecté 17 7 0 10 -262144 -1
+-1 0 8;
+#X text 452 447 Acceleration en G;
+#X text 452 464 Maximum = 2g;
+#X text 451 532 Maximum = 500 degrés par secondes;
+#X text 453 575 Toucher de l'Apidou;
+#X text 24 100 L'objectif de cet objet Puredata est de créer une interface
+aisée d'intégration aux processus temps réels;
+#X obj 273 467 unpack 0 0 0 0 0 0 0;
+#X text 393 50 Démarrer le patch Puredata Apidou avant de lançer
+le script python;
+#X obj 29 198 bng 15 250 50 0 empty empty impulsion 17 7 0 10 -262144
 -1 -1;
-#X text 577 260 active temporairement le vibreur;
-#X msg 556 285 time 500 500;
-#X text 638 281 Change le temps d'activation et la loop;
-#X msg 556 313 loop 1;
-#X text 604 313 Met en boucle le clignotement;
-#X text 557 425 SORTIE 1;
-#X text 558 492 SORTIE 2;
-#X text 559 557 SORTIE 3;
-#X text 563 603 SORTIE 4;
-#X text 564 625 1 si APIdou est connecté;
-#X connect 0 0 5 1;
+#X obj 23 171 tgl 15 0 empty empty active\ vibreur 17 7 0 10 -262144
+-1 -1 0 1;
+#X msg 36 241 loop \$1;
+#X obj 36 218 tgl 15 0 empty empty boucle 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 22 11 cnv 15 130 30 empty empty APIdou 20 12 0 25 -260097 -1
+0;
+#X obj 445 172 cnv 15 150 15 empty empty entree 20 12 0 14 -233017
+-66577 0;
+#X obj 449 401 cnv 15 150 15 empty empty sorties 20 12 0 14 -233017
+-66577 0;
+#X text 393 82 cette version est compatible extended 0.43.4 et pd-l2ork
+;
+#X text 446 338 DROITE;
+#X msg 447 364 graph;
+#X text 492 363 Affiche les graphiques des mouvements;
+#X text 446 197 GAUCHE;
+#X text 447 215 Vibreur;
+#X obj 447 237 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 448 259 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 470 260 active temporairement le vibreur;
+#X msg 449 285 time 500 500;
+#X text 531 281 Change le temps d'activation et la loop;
+#X msg 449 313 loop 1;
+#X text 497 313 Met en boucle le clignotement;
+#X text 450 425 SORTIE 1;
+#X text 451 492 SORTIE 2;
+#X text 452 557 SORTIE 3;
+#X text 456 603 SORTIE 4;
+#X text 457 625 1 si APIdou est connecté;
+#X msg 122 251 time \$1 \$2;
+#X obj 132 213 pack 0 0;
+#X floatatom 173 181 5 0 0 0 - - -, f 5;
+#X floatatom 138 181 5 0 0 0 - - -, f 5;
+#X floatatom 169 578 5 0 0 0 - - -, f 5;
+#X obj 165 599 change;
+#X floatatom 217 599 5 0 0 0 - - -, f 5;
+#X obj 213 620 change;
+#X text 24 48 Objet pure data pour receptionner les données d'Apidou
+le doudou connecté.;
+#X text 24 81 Plus d'infos sur http://www.apidou.fr/;
+#X text 24 135 Cet objet est en lien avec un script python qui envoi
+en protocole tcp standard;
+#X text 471 238 active le vibreur en continu;
+#X text 452 508 Gyroscope en degré par secondes;
 #X connect 1 0 3 0;
 #X connect 1 1 4 0;
 #X connect 1 2 2 0;
 #X connect 5 0 1 0;
 #X connect 5 1 13 0;
-#X connect 5 2 26 0;
+#X connect 5 2 23 0;
 #X connect 5 3 17 0;
+#X connect 6 0 54 0;
+#X connect 7 0 56 0;
 #X connect 13 0 15 0;
 #X connect 13 1 16 0;
 #X connect 13 2 14 0;
-#X connect 26 0 6 0;
-#X connect 26 1 7 0;
-#X connect 26 2 8 0;
-#X connect 26 3 9 0;
-#X connect 26 4 10 0;
-#X connect 26 5 11 0;
-#X connect 26 6 12 0;
-#X connect 29 0 5 0;
-#X connect 30 0 5 0;
-#X connect 31 0 5 0;
-#X connect 32 0 5 0;
-#X connect 33 0 32 0;
+#X connect 23 0 6 0;
+#X connect 23 1 7 0;
+#X connect 23 2 8 0;
+#X connect 23 3 9 0;
+#X connect 23 4 10 0;
+#X connect 23 5 11 0;
+#X connect 23 6 12 0;
+#X connect 25 0 5 0;
+#X connect 26 0 5 0;
+#X connect 27 0 5 0;
+#X connect 28 0 27 0;
+#X connect 50 0 5 0;
+#X connect 51 0 50 0;
+#X connect 52 0 51 1;
+#X connect 53 0 51 0;
+#X connect 54 0 55 0;
+#X connect 56 0 57 0;
