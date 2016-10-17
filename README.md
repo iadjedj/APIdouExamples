@@ -1,19 +1,18 @@
 # APIdouExamples
-Examples codes to connect to APIdou ([website](www.apidou.fr))
 
-This repository contains python scripts and command-line tools to interact with APIdou using different programming langages :
-## CLI tools
-  * **tcp** : Redirection to a TCP socket
-  * **com** : Redirection to a fake serial port (Linux only)
-  * **scratch** : Redirection to Scratch 2.0 (local HTTP server)
+This repository contains a command-line tool to interact with [APIdou](www.apidou.fr).
+It also contains some example codes to interact using different programming langages.
 
-Theses helpers uses the APIdou python module, which can be found on [PyPi](https://pypi.python.org/pypi/apidou) or on its [GitHub Depot](https://github.com/iadjedj/apidou).
+## Command-line tool
+Python script which can redirect APIdou datas locally over TCP or a fake serial port (serial only working on Linux).
+
+This code use the APIdou Python module, which can be found on [PyPi](https://pypi.python.org/pypi/apidou) or on its [GitHub Depot](https://github.com/iadjedj/apidou).
 
 ## Examples scripts :
-  * **python** : Python examples
-  * Using TCP helper :
-   * **puredata** : Puredata object for APIdou. Developed in collaboration with [L. Barnier](https://github.com/kouphrou)
-   * **processing** : Processing script
-   * **unity** : Unity project
-  * **scratch** : Scratch 2.0 example (uses the special Scratch helper)
-  
+* **Python** : Show how the APIdou module can be used alone
+* Using the command-line tool with the TCP option :
+  * **Puredata** : Puredata lib for APIdou. Developed in collaboration with [L. Barnier](https://github.com/kouphrou)
+  * **Processing**
+  * **Unity**
+ * **Scratch 2.0** : Uses a special command line tool which is included in this folder
+ 
