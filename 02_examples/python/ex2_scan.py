@@ -2,17 +2,18 @@ import logging
 import sys
 import time
 from apidou import APIdou
+import pygatt.exceptions
 
 def main():
 	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
 
-	adapter = raw_input("Which BLE device are you using ? (entrez bled112 ou linux)\n")
+	backend = raw_input("Which BLE device are you using ? (entrez bled112 ou linux)\n")
 
-	if adapter not in {"bled112", "linux"}:
+	if backend not in {"bled112", "linux"}:
 		print "Not a valid choice"
 		return
 
-	scan_result = APIdou.scan(adapter, timeout=5)
+	scan_result = APIdou.scan(backend, timeout=5)
 	for i in range(0, len(scan_result)):
 		print i, ") Name :", scan_result[i]['name'], "/ Address: ", scan_result[i]['address']
 		i += 1

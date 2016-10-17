@@ -2,19 +2,20 @@ import logging
 import sys
 import time
 from apidou import APIdou
+import pygatt.exceptions
 
-MY_APIDOU = "E6:A4:7B:AB:A9:2D"
+MY_APIDOU = "CB:99:E8:46:1F:46"
 
 def main():
 	"""
 	Use this main as a template to build your python code
 	"""
-	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
+	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 	try:
 		# Create an APIdou object using a BlueGiga adapter
-		# and a given MAC address
-		apidou = APIdou("bled112", MY_APIDOU)
+		# and a given MAC address
+		apidou = APIdou("linux", MY_APIDOU)
 		# Connect to this APIdou
 		apidou.connect()
 
@@ -33,9 +34,9 @@ def main():
 			if apidou.isTouched(APIdou.ANTENNA):
 				print "The antenna is touched"
 
-			if apidou.getPosition() == APIdouPositions.UPSIDE_DOWN:
+			if apidou.getPosition() == APIdou.UPSIDE_DOWN:
 				apidou.setVibration(True)
-			else:
+				time.sleep(0.1)
 				apidou.setVibration(False)
 			time.sleep(0.01)
 
