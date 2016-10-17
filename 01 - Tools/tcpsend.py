@@ -29,8 +29,10 @@ class SocketThread(threading.Thread):
 				data = ""
 
 
-class PdSend():
-	""" Simple socket wrapper to talk FUDI with PD """
+class TcpSend():
+	""" Simple socket wrapper
+	Protocol is weird to comply with the puredata one (FUDI)
+	"""
 	pdhost = 'localhost'
 	sport = 3000
 	pd = '' # the socket object will live here

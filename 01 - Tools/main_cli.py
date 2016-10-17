@@ -3,7 +3,7 @@ import sys
 import time
 import argparse
 from apidou import APIdou
-from pdsend import *
+from tcpsend import *
 if sys.platform.startswith('linux'):
 	from comsend import *
 import pygatt.backends
@@ -66,7 +66,7 @@ def main():
 	args = parser.parse_args()
 
 	if args.tcp:
-		output = PdSend()
+		output = TcpSend()
 	elif args.com:
 		if sys.platform.startswith('linux'):
 			output = COMSend()
