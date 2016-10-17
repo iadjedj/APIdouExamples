@@ -12,6 +12,7 @@ import logging
 import pygatt.exceptions
 import sys
 import time
+import argparse
 
 app = Flask("hue_helper_app")
 apidou = ''
@@ -100,11 +101,19 @@ def main():
 	"""
 	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
 
+
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-type', '-t', required=True, choices=['bled112', 'linux'] ,\
+		help='Are you using a BLED112 or regular BLE Adapter on Linux ?')
+	parser.add_argument('-addr', '-a', required=True, \
+		help='MAC address of your APIdou, e.g. 00:11:22:33:44:FF')
+	args = parser.parse_args()
+
 	try:
 		global apidou
 		# Create an APIdou object using a BlueGiga adapter
 		# and a given MAC address
-		apidou = APIdou("linux", "CB:99:E8:46:1F:46")
+		apidou = APIdou(args.type, args.addr)
 		# Connect to this APIdou
 		apidou.connect()
 
@@ -117,8 +126,8 @@ def main():
 		apidou.setNotifyTouch(True)
 
 		print "Connected to APIdou"
-		print(" * Press Control + C to quit.")
 		print "APIdou helper launched"
+		print "Press Control + C to quit"
 		app.run('0.0.0.0', port=1337)
 	except pygatt.exceptions.NotConnectedError:
 		print "Could not connect. Check if device is on (program will exit)"

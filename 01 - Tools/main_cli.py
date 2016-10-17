@@ -59,7 +59,6 @@ def main():
 		help='Are you using a BLED112 or regular BLE Adapter on Linux ?')
 	parser.add_argument('-addr', '-a', required=True, \
 		help='MAC address of your APIdou, e.g. 00:07:80:02:F2:F2')
-	# To implement
 	parser.add_argument('-tcp', required=False, \
 		help='Activate a forward to TCP (port 3000)', action='store_true')
 	parser.add_argument('-com', required=False, \
