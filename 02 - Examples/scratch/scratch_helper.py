@@ -96,8 +96,10 @@ def cross_domain_check():
 """
 
 def main():
-	"""
-	Put some doc here
+	""" Helper to communicate with Scratch 2.0
+	This code uses Flask to create a small local HTTP server on port 1337,
+	it implements the Scratch HTTP procotol (more info on :
+	https://wiki.scratch.mit.edu/w/images/ExtensionsDoc.HTTP-9-11.pdf )
 	"""
 	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
 
@@ -111,12 +113,11 @@ def main():
 
 	try:
 		global apidou
-		# Create an APIdou object using a BlueGiga adapter
-		# and a given MAC address
+
 		apidou = APIdou(args.type, args.addr)
 		# Connect to this APIdou
 		apidou.connect()
-
+		print "Connected to APIdou"
 		# Make the APIdou vibrate for 100ms to check if connection is ok
 		apidou.setVibration(True)
 		time.sleep(0.1)
@@ -125,7 +126,6 @@ def main():
 		apidou.setNotifyAccel(True)
 		apidou.setNotifyTouch(True)
 
-		print "Connected to APIdou"
 		print "APIdou helper launched"
 		print "Press Control + C to quit"
 		app.run('0.0.0.0', port=1337)
