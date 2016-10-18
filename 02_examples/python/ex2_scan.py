@@ -29,7 +29,7 @@ def main():
 		return
 
 	try:
-		apidou = APIdou(adapter, scan_result[choice]['address'])
+		apidou = APIdou(backend, scan_result[choice]['address'])
 		apidou.connect()
 	except pygatt.exceptions.NotConnectedError:
 		print "Could not connect. Check if device is on (program will exit)"
