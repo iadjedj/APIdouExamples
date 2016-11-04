@@ -44,6 +44,8 @@ def main():
 		print "Could not connect. Check if device is on (program will exit)"
 	except KeyboardInterrupt:
 		print "\nCtrl-C pressed. Goodbye!"
+	except Exception as e:
+		print e
 	finally:
 		apidou.disconnect()
 

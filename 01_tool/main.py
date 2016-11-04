@@ -52,7 +52,7 @@ def handleOutput(device, output, is_tcp):
 def main():
 	global apidou
 
-	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
+	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-type', '-t', required=True, choices=['bled112', 'linux'] ,\
@@ -96,6 +96,8 @@ def main():
 		print "Could not connect. Check if device is on (program will exit)"
 	except KeyboardInterrupt:
 		print "\nCtrl-C pressed. Goodbye!"
+	except Exception as e:
+		print e
 	finally:
 		apidou.disconnect()
 		if args.tcp or args.com:
