@@ -101,23 +101,33 @@ def main():
 	it implements the Scratch HTTP procotol (more info on :
 	https://wiki.scratch.mit.edu/w/images/ExtensionsDoc.HTTP-9-11.pdf )
 	"""
-	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
+	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
+	print "Launching scan..."
+	scan_result = APIdou.scan("bled112", timeout=5)
 
-	parser = argparse.ArgumentParser()
-	parser.add_argument('-type', '-t', required=True, choices=['bled112', 'linux'] ,\
-		help='Are you using a BLED112 or regular BLE Adapter on Linux ?')
-	parser.add_argument('-addr', '-a', required=True, \
-		help='MAC address of your APIdou, e.g. 00:11:22:33:44:FF')
-	args = parser.parse_args()
+	for i in range(0, len(scan_result)):
+		print i, ") Name :", scan_result[i]['name'], "/ Address: ", scan_result[i]['address']
+		i += 1
+
+	nb = raw_input("Please enter the number corresponding to your APIdou : ")
+
+	try:
+		choice = int(nb)
+	except ValueError:
+		print "Please enter a number"
+		return
+	if choice not in range(0, len(scan_result)):
+		print "Not a valid choice"
+		return
 
 	try:
 		global apidou
 
-		apidou = APIdou(args.type, args.addr)
-		# Connect to this APIdou
+		apidou = APIdou("bled112", scan_result[choice]['address'])
 		apidou.connect()
 		print "Connected to APIdou"
+
 		# Make the APIdou vibrate for 100ms to check if connection is ok
 		apidou.setVibration(True)
 		time.sleep(0.1)
