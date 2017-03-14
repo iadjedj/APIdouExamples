@@ -2,8 +2,8 @@ import logging
 import sys
 import time
 import argparse
-from apidou import *
-from pdsend import *
+from apidou import APIdou
+from tcpsend import *
 if sys.platform.startswith('linux'):
 	from comsend import *
 import pygatt.backends
@@ -52,14 +52,13 @@ def handleOutput(device, output, is_tcp):
 def main():
 	global apidou
 
-	logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
+	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-type', '-t', required=True, choices=['bled112', 'linux'] ,\
 		help='Are you using a BLED112 or regular BLE Adapter on Linux ?')
 	parser.add_argument('-addr', '-a', required=True, \
 		help='MAC address of your APIdou, e.g. 00:07:80:02:F2:F2')
-	# To implement
 	parser.add_argument('-tcp', required=False, \
 		help='Activate a forward to TCP (port 3000)', action='store_true')
 	parser.add_argument('-com', required=False, \
@@ -67,7 +66,7 @@ def main():
 	args = parser.parse_args()
 
 	if args.tcp:
-		output = PdSend()
+		output = TcpSend()
 	elif args.com:
 		if sys.platform.startswith('linux'):
 			output = COMSend()
@@ -97,6 +96,8 @@ def main():
 		print "Could not connect. Check if device is on (program will exit)"
 	except KeyboardInterrupt:
 		print "\nCtrl-C pressed. Goodbye!"
+	except Exception as e:
+		print e
 	finally:
 		apidou.disconnect()
 		if args.tcp or args.com:
