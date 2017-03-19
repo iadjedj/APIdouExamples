@@ -1,12 +1,9 @@
 # APIdouExamples
 
-This repository contains a command-line tool to interact with [APIdou](www.apidou.fr).
-It also contains some example codes to interact using different programming langages.
+This repository contains example codes using the [APIdou](https://www.apidou.fr) Python module available on [PyPi](https://pypi.python.org/pypi/apidou).
 
 ## Command-line tool
-Python script which can redirect APIdou datas locally over TCP or a fake serial port (serial only working on Linux).
-
-This code use the APIdou Python module, which can be found on [PyPi](https://pypi.python.org/pypi/apidou) or on its [GitHub Depot](https://github.com/iadjedj/apidou).
+Python script which can redirect APIdou datas locally over TCP or a fake serial port (only on Linux).
 
 ## Examples scripts :
 * **Python** : Show how the APIdou module can be used alone
@@ -14,5 +11,7 @@ This code use the APIdou Python module, which can be found on [PyPi](https://pyp
   * **Puredata** : Puredata lib for APIdou. Developed in collaboration with [L. Barnier](https://github.com/kouphrou)
   * **Processing**
   * **Unity**
- * **Scratch 2.0** : Uses a special command line tool which is included in this folder
+
+## MIT Scratch 2.0
+ * **Scratch** : Special command line tool for using APIdou with Scratch
  
