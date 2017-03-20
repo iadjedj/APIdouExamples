@@ -65,22 +65,22 @@ def poll():
 	pos = apidou.getPosition()
 
 	msg += "\nposition/sur_le_dos "
-	msg += "true" if pos == APIdou.APIdouPositions.ON_THE_BACK else "false"
+	msg += "true" if pos == APIdou.ON_THE_BACK else "false"
 
 	msg += "\nposition/sur_le_ventre "
-	msg += "true" if pos == APIdou.APIdouPositions.FACING_DOWN else "false"
+	msg += "true" if pos == APIdou.FACING_DOWN else "false"
 
 	msg += "\nposition/debout "
-	msg += "true" if pos == APIdou.APIdouPositions.STANDING else "false"
+	msg += "true" if pos == APIdou.STANDING else "false"
 
 	msg += "\nposition/la_tete_en_bas "
-	msg += "true" if pos == APIdou.APIdouPositions.UPSIDE_DOWN else "false"
+	msg += "true" if pos == APIdou.UPSIDE_DOWN else "false"
 
 	msg += "\nposition/sur_la_gauche "
-	msg += "true" if pos == APIdou.APIdouPositions.ON_THE_LEFT else "false"
+	msg += "true" if pos == APIdou.ON_THE_LEFT else "false"
 
 	msg += "\nposition/sur_la_droite "
-	msg += "true" if pos == APIdou.APIdouPositions.ON_THE_RIGHT else "false"
+	msg += "true" if pos == APIdou.ON_THE_RIGHT else "false"
 
 	msg += "\n"
 
